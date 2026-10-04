@@ -1,0 +1,2 @@
+-r requirements-eval.txt
+mem0ai==2.0.4

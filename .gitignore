@@ -218,3 +218,25 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+.env.*
+!.env.example
+/data/
+/logs/
+/eval/results/
+/outputs/
+/outputs_live/
+/models/
+*.log
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.safetensors
+*.onnx
+*.pt
+*.pth
+*.db
+*.sqlite*
+*.dump
+/server/fixtures/character_memory_seed.json

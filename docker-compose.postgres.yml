@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: llm-memory-system-pg
+    environment:
+      POSTGRES_USER: llm_memory
+      POSTGRES_PASSWORD: llm_memory
+      POSTGRES_DB: llm_memory
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - llm_memory_pg_data:/var/lib/postgresql/data
+      - ./server/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      - ./server/migrations/001_future_tasks.sql:/docker-entrypoint-initdb.d/zz_future_tasks.sql:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U llm_memory -d llm_memory"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  llm_memory_pg_data:
